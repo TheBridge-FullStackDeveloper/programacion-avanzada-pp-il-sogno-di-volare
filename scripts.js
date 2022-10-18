@@ -1,3 +1,5 @@
+// declaraciones
+
 const civilAircrafts = [
     'assets/avion-civil-1.jpg',
     'assets/avion-civil-2.jpg',
@@ -32,32 +34,59 @@ const militaryHelicopter = [
 
 class Gallery {
     constructor(civilImages, militaryImages) {
+        this.civilImages = civilImages;
+        this.militaryImages = militaryImages;
     }
-    
+
     getRandomCivil() {
+        var numRandom = Math.floor(Math.random() * (this.civilImages.length - 0) - 0);
+
+        console.log(this.civilImages[numRandom]);
+        return this.civilImages[numRandom];
     }
-    
+
     getRandomMilitary() {
+        var numRandom = Math.floor(Math.random() * (this.militaryImages.length - 0) - 0);
+
+        console.log(this.militaryImages[numRandom]);
+        return this.militaryImages[numRandom];
     }
-    
+
     getAll() {
+        console.log(this.civilImages.concat(this.militaryImages));
+        return this.civilImages.concat(this.militaryImages);
     }
 }
 
 class Painter {
     constructor() {
+        this.gallery = this.createGallery();
     }
 
     createGallery() {
+        const newGallery = document.createElement("section");
+        document.body.appendChild(newGallery);
+
+        return newGallery;
     }
 
     createImageTag(imageUrl) {
+        let picture = document.createElement("picture");
+        let img = document.createElement("img");
+        img.src = imageUrl;
+        picture.appendChild(img);
+
+        return picture;
     }
 
     paintSingleImage(imageUrl) {
+        this.gallery.appendChild(this.createImageTag(imageUrl));
     }
 
     paintMultipleImages(arrayOfImages) {
+        arrayOfImages.forEach(img => {
+            this.paintSingleImage(img);
+        });
     }
 }
 
